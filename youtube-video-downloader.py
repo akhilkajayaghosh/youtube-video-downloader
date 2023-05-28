@@ -7,17 +7,13 @@ window.geometry("800x350")
 window.title("Youtube Downloader")
 window.configure(bg="#BEBEBE")
 window.resizable(False,False)
-lr=tk.Label(window, text="Resolution",font=(25),width=10).place(x=300,y=100)
-lt=tk.Label(window, text="Format",font=(25),width=10).place(x=300,y=130)
-menu1=StringVar()
-menu2=StringVar()
-menu1.set("select")
-drop= OptionMenu(window, menu1,"select")
-drop.place(x=418,y=100)
-drop= OptionMenu(window, menu2,"select")
-drop.place(x=418,y=130)
-menu2.set("select")
+
 def display_selected(choice):
+    global menu2
+    lt=tk.Label(window, text="Format",font=(25),width=10)
+    lt.place(x=300,y=130)
+    menu2=StringVar()
+    menu2.set("select")
     format=[]
     choice = menu1.get()
     for i in yt.streams.filter(type='video',res=choice,progressive=True):
@@ -27,7 +23,11 @@ def display_selected(choice):
     drop.place(x=420,y=130)    
 
 def getdetails():
-    global yt
+    global yt,menu1
+    lr=tk.Label(window, text="Resolution",font=(25),width=10)
+    lr.place(x=300,y=100)
+    menu1=StringVar()
+    menu1.set("select")
     yt = YouTube(url.get())
     res1=[]
     for i in yt.streams.filter(type='video',progressive=True):
@@ -44,6 +44,7 @@ def download():
         status.configure(text="Successfully downloaded")
     except:
         status.configure(text="Error!!")
+
 my_dir=''
 def browse():
     global op
