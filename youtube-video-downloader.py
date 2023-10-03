@@ -16,7 +16,7 @@ def display_selected(choice):
     menu2.set("select")
     format=[]
     choice = menu1.get()
-    for i in yt.streams.filter(type='video',res=choice,progressive=True):
+    for i in yt.streams.filter(type="video",res=choice,progressive=True):
         format.append(i.mime_type)
     format=(list(set(format)))
     drop= OptionMenu(window, menu2,*format)
@@ -30,7 +30,7 @@ def getdetails():
     menu1.set("select")
     yt = YouTube(url.get())
     res1=[]
-    for i in yt.streams.filter(type='video',progressive=True):
+    for i in yt.streams.filter(type="video",progressive=True):
         res1.append(i.resolution)
     res1=(list(set(res1)))
     drop= OptionMenu(window,menu1,*res1,command=display_selected)
@@ -39,7 +39,7 @@ def getdetails():
 def download():
     try:
         yt=YouTube(url.get())
-        yt=yt.streams.filter(res=menu1.get(),mime_type=menu2.get(),type='video').first()
+        yt=yt.streams.filter(res=menu1.get(),mime_type=menu2.get(),type="video").first()
         yt.download(op.get())
         status.configure(text="Successfully downloaded")
     except:
